@@ -1,15 +1,13 @@
 def solution(numbers):
     answer = ''
-    res = dict()
+    res = []
 
     for n in numbers:
-        res.__setitem__(str(n), str(n)[0])
+        res.append([str(n), str(n) * int(12 / len(str(n)))])
+    res = sorted(res, key = lambda x: x[1], reverse = True)
 
-    print(res)
-    res = sorted(res.items(), key = lambda x: x[1], reverse = True)
-    print(res)
-    res.sort(reverse = True)
-    print(res)
+    for o, r in res:
+        answer += str(o)
 
     return answer
 
@@ -17,9 +15,7 @@ def solution(numbers):
 if __name__ == '__main__':
     ans = solution([3, 6, 9])
     print(ans)
-
     ans = solution([6, 10, 2])
     print(ans)
-
-    ans = solution([3, 33, 30, 34, 5, 9])
+    ans = solution([3, 33, 30, 34, 5, 9, 100, 110])
     print(ans)
