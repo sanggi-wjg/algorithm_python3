@@ -9,7 +9,7 @@ def solution(numbers):
     for o, r in res:
         answer += str(o)
 
-    return answer
+    return str(int(answer))
 
 
 if __name__ == '__main__':
@@ -17,5 +17,9 @@ if __name__ == '__main__':
     print(ans)
     ans = solution([6, 10, 2])
     print(ans)
+    ans = solution([3, 33, 30, 34, 5, 9])
+    print(ans)
     ans = solution([3, 33, 30, 34, 5, 9, 100, 110])
+    print(ans)
+    ans = solution([0, 0, 0, 0, 0])
     print(ans)
