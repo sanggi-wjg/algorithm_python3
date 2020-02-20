@@ -3,31 +3,25 @@ def solution(answers):
     type_1 = [1, 2, 3, 4, 5]
     type_2 = [2, 1, 2, 3, 2, 4, 2, 5]
     type_3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
-    total = dict()
+    count = { '1': 0, '2': 0, '3': 0 }
 
     for n, a in enumerate(answers):
         if a == type_1[n % len(type_1)]:
-            if '1' in total.keys():
-                total.__setitem__('1', total.get('1') + 1)
-            else:
-                total.setdefault('1', 1)
+            count.__setitem__('1', count.get('1') + 1)
         if a == type_2[n % len(type_2)]:
-            if '2' in total.keys():
-                total.__setitem__('2', total.get('2') + 1)
-            else:
-                total.setdefault('2', 1)
+            count.__setitem__('2', count.get('2') + 1)
         if a == type_3[n % len(type_3)]:
-            if '3' in total.keys():
-                total.__setitem__('3', total.get('3') + 1)
-            else:
-                total.setdefault('3', 1)
+            count.__setitem__('3', count.get('3') + 1)
 
-    print('origin: ', total)
-    total = dict(sorted(total.items(), key = lambda x: x[1], reverse = True))
-    print('sorted: ', total)
+    sortCount = dict(sorted(count.items(), key = lambda x: x[1], reverse = True))
+    print(count)
+    print(sortCount)
 
-    for k, v in total.items():
-        answer.append(int(k))
+    cmp = 0
+    for k, v in sortCount.items():
+        if v >= cmp:
+            answer.append(int(k))
+            cmp = v
 
     if not answer:
         return [1, 2, 3]
@@ -36,18 +30,13 @@ def solution(answers):
 
 
 if __name__ == '__main__':
-    ans = solution([1, 2, 3, 4, 5])
-    print(ans)
-    print()
+    testData = [
+        [1, 2, 3, 4, 5],
+        [1, 3, 2, 4, 2],
+        [3, 3, 3, 4, 1, 1, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+        [5, 5, 5, 5, 3],
+    ]
 
-    ans = solution([1, 3, 2, 4, 2])
-    print(ans)
-    print()
-
-    ans = solution([3, 3, 3, 4, 1, 1, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3])
-    print(ans)
-    print()
-
-    ans = solution([5, 5, 5, 5, 3])
-    print(ans)
-    print()
+    for test in testData:
+        ans = solution(test)
+        print(ans, end = '\n\n')
