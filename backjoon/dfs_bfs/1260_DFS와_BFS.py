@@ -49,7 +49,7 @@ for i in range(M):
     a, b = map(int, input().split())
     G.setdefault(a, { b }) if a not in G.keys() else G[a].add(b)
     G.setdefault(b, { a }) if b not in G.keys() else G[b].add(a)
-# print(G)
+print(G)
 
 result = dfs(G, V)
 for i in range(len(result)):
