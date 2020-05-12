@@ -1,24 +1,24 @@
 def solution(n: int, computers: list):
-    conn = dict()
+    graph = { }
+    result = []
 
-    for no, c in enumerate(computers):
-        for i in range(n):
-            if c[i] == 1:
-                if no not in conn.keys():
-                    conn.setdefault(no, { no, i })
-                else:
-                    conn[no].add(no)
-                    conn[no].add(i)
+    for i, computer in enumerate(computers):
+        for j, c in enumerate(computer):
+            if c == 1:
+                graph.setdefault(i, { j }) if i not in graph.keys() else graph[i].add(j)
 
-    visited = dfs(conn, 0)
-    # print(conn, " | ", visited)
+    for i in range(len(graph)):
+        result.append(dfs(graph, i))
 
-    return (1 + n) - len(visited)
+    result = list(set(map(tuple, result)))
+
+    # print(computers, ' | ', graph, ' | ', result)
+    return len(result)
 
 
-def dfs(graph, root):
+def dfs(graph, root_node):
     visited = []
-    stack = [root]
+    stack = [root_node]
 
     while stack:
         n = stack.pop()
@@ -27,13 +27,16 @@ def dfs(graph, root):
             visited.append(n)
             stack += graph[n] - set(visited)
 
-    return visited
+    return sorted(visited)
 
 
 test = [
     [3, [[1, 1, 0], [1, 1, 0], [0, 0, 1]]],
-    # [3, [[1, 1, 0], [1, 1, 1], [0, 1, 1]]],
-    [4, [[1, 0, 0, 1], [0, 1, 1, 1], [0, 1, 1, 0], [1, 1, 0, 1]]],
+    [3, [[1, 1, 0], [1, 1, 1], [0, 1, 1]]],
+]
+
+ANSWER = [
+    2, 1
 ]
 
 for a, b in test:
