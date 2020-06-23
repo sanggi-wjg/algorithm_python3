@@ -1,0 +1,16 @@
+coin_list = [500, 100, 50, 1]
+
+
+def min_coin_count(value, coin_list):
+    total_coin_count, details = 0, []
+
+    for coin in coin_list:
+        coin_num = value // coin
+        total_coin_count += coin_num
+        value -= coin_num * coin
+        details.append([coin, coin_num])
+
+    return total_coin_count, details
+
+
+print(min_coin_count(4720, coin_list))
