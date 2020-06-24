@@ -13,16 +13,21 @@ data = {
 def solution(a, b):
     num = str(a)[-1]
 
-    if num in ['0', '1', '5', '6']:
-        return int(num)
+    if num in ['1', '5', '6']:
+        return num
+    elif num == '0':
+        return '10'
     else:
         d = data.get(num)
-        return d[b % len(d) - 1]
+        return d[(b % len(d)) - 1]
 
 
 T = int(sys.stdin.readline())
+result = []
 
 for _ in range(T):
     a, b = map(int, sys.stdin.readline().split())
-    result = solution(a, b)
-    sys.stdout.writelines(str(result))
+    result.append(solution(a, b))
+
+for r in result:
+    sys.stdout.writelines(str(r) + '\n')
